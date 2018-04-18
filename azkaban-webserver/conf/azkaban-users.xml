@@ -1,7 +1,13 @@
 <azkaban-users>
 	<user username="azkaban" password="azkaban" roles="admin" groups="azkaban" />
 	<user username="metrics" password="metrics" roles="metrics"/>
+	<user username="executor" password="executor" roles="readall,executeall,scheduleall"/>
 
 	<role name="admin" permissions="ADMIN" />
 	<role name="metrics" permissions="METRICS"/>
+	<role name="readall" permissions="READ" />
+	<role name="writeall" permissions="WRITE" />
+	<role name="executeall" permissions="EXECUTE" />
+	<role name="scheduleall" permissions="SCHEDULE" />
+	<role name="createprojetctsall" permissions="CREATEPROJECTS" />
 </azkaban-users>

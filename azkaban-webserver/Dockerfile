@@ -13,7 +13,7 @@ ENV TERM linux
 # Work around initramfs-tools running on kernel 'upgrade': <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=594189>
 ENV INITRD No
 
-ENV AZK_VERSION 3.25.1
+ENV AZK_VERSION 3.43.0
 ENV MYSQL_JDBC_VERSION 5.1.35
 
 WORKDIR /root
