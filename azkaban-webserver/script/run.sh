@@ -1,7 +1,7 @@
 #!/bin/sh
 # Wait for database to get available
 
-AZK_VERSION="3.25.1"
+AZK_VERSION="3.43.0"
 
 DB_LOOPS="20"
 MYSQL_HOST="mariadb"
