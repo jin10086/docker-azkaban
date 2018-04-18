@@ -24,7 +24,7 @@ done
 # initialize azkaban db
 
 echo "import azkaban create-all-sql.sql to $MYSQL_HOST"
-mysql -h $MYSQL_HOST -uazkaban -pazkaban azkaban < azkaban-$AZK_VERSION/azkaban-db/build/install/azkaban-db/create-all-sql-3.27.0-1-gc55e882.sql
+mysql -h $MYSQL_HOST -uazkaban -pazkaban azkaban < azkaban-$AZK_VERSION/azkaban-db/build/install/azkaban-db/create-all-sql-0.1.0-SNAPSHOT.sql
 
 #start the daemon
 exec $START_CMD
