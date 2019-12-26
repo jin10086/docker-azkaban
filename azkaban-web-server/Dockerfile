@@ -1,8 +1,6 @@
 FROM openjdk:8-alpine
 
-ENV AZK_VERSION 3.81.0
-
-ENV MYSQL_JDBC_VERSION 5.1.35
+ENV AZK_VERSION 3.81.0 
 
 WORKDIR /root
 
@@ -26,7 +24,8 @@ EXPOSE 8443
 
 # Define default workdir
 WORKDIR azkaban-web-server/
-#COPY script/run.sh run.sh
-#RUN chmod +x run.sh
+COPY script/run.sh run.sh
+RUN chmod +x run.sh
 
-CMD ["bin/start-web.sh"]
+#CMD ["bin/start-web.sh"]
+CMD ["./run.sh"]

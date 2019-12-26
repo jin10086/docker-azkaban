@@ -1,11 +1,27 @@
-executor:
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=azkaban
+      - MYSQL_PASSWORD=azkaban
+      - MYSQL_DATABASE=azkaban
+      - MYSQL_ROOT_PASSWORD=wootwoot
+    links:
+       - mysql    
+
+  executor:
     build: azkaban-exec-server/.
     restart: always
 
-webserver:
+  webserver:
     build: azkaban-web-server/.
     restart: always
     ports:
-        - "8443:8443"
+      - "8443:8443"
     links:
-        - executor:azkaban-exec-server
+      - executor:azkaban-exec-server
+      - mysql
