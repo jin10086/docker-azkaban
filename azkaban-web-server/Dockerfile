@@ -11,6 +11,7 @@ RUN set -eux \
     && ./gradlew build \
     && ./gradlew installDist \
     && mv azkaban-web-server/build/install/azkaban-web-server ../ \
+    && mv azkaban-db/build/install/azkaban-db/create-all-sql-0.1.0-SNAPSHOT.sql ../ \
     && cd .. \
     && mkdir azkaban-web-server/logs/ \
     && sed -i "s/&//" azkaban-web-server/bin/start-web.sh \

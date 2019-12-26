@@ -1,10 +1,10 @@
 #!/bin/sh
 # Wait for database to get available
 
-AZK_VERSION="3.43.0"
+AZK_VERSION="3.38.1"
 
 DB_LOOPS="20"
-MYSQL_HOST="mariadb"
+MYSQL_HOST="mysql"
 MYSQL_PORT="3306"
 START_CMD="bin/start-web.sh"
 
@@ -24,7 +24,7 @@ done
 # initialize azkaban db
 
 echo "import azkaban create-all-sql.sql to $MYSQL_HOST"
-mysql -h $MYSQL_HOST -uazkaban -pazkaban azkaban < azkaban-$AZK_VERSION/azkaban-db/build/install/azkaban-db/create-all-sql-0.1.0-SNAPSHOT.sql
+mysql -h $MYSQL_HOST -uazkaban -pazkaban azkaban < create-all-sql-0.1.0-SNAPSHOT.sql
 
 #start the daemon
 exec $START_CMD
