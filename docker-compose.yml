@@ -11,17 +11,18 @@ services:
       - MYSQL_DATABASE=azkaban
       - MYSQL_ROOT_PASSWORD=wootwoot
      
-  executor:
-    build: azkaban-exec-server/.
+  execserver:
+    # build: azkaban-exec-server/.
+    image: javachen/azkaban-exec-server
     restart: always
     links:
        - mysql   
 
   webserver:
-    build: azkaban-web-server/.
+    image: javachen/azkaban-web-server
     restart: always
     ports:
       - "8443:8443"
     links:
-      - executor:azkaban-exec-server
+      - execserver
       - mysql
