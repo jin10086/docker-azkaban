@@ -1,25 +1,20 @@
 FROM openjdk:8-alpine
 
-ENV AZK_VERSION 3.81.0
-
 WORKDIR /data
-
-RUN set -eux \
-	&& apk add --update curl tzdata git \
-    && curl -sLk https://github.com/azkaban/azkaban/archive/$AZK_VERSION.tar.gz| tar xzv \
-    && cd azkaban-$AZK_VERSION \
-    && ./gradlew build installDist -x test --debug \
-    && mv azkaban-exec-server/build/install/azkaban-exec-server ../ \
-    && mkdir ../azkaban-exec-server/logs/ \
-    && ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone \
-    && apk del tzdata curl git \
-    && rm -rf azkaban-$AZK_VERSION /tmp/* var/tmp/* /var/cache/apk/* ~/.gradle
-
-COPY conf/* azkaban-exec-server/conf/
-COPY plugins/jobtypes/commonprivate.properties azkaban-exec-server/plugins/jobtypes/commonprivate.properties
 
 # Azkaban executor port
 EXPOSE 12321
+
+COPY azkaban-exec-server.zip .
+
+RUN set -eux \
+	&& apk add --update mysql-client mongodb-tools postgresql-client tzdata \
+    && ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone \
+    && apk del tzdata \
+    && unzip azkaban-exec-server.zip \
+    && rm -rf azkaban-exec-server.zip /tmp/* var/tmp/* /var/cache/apk/* 
+
+COPY conf/* azkaban-exec-server/conf/
 
 # Define default workdir
 WORKDIR azkaban-exec-server/

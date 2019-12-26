@@ -23,3 +23,5 @@ Session.vim
 sftp-config.json
 
 *.DS_Store
+
+*.*.zip
