@@ -1,25 +1,11 @@
-mariadb:
-    image: mariadb:10
-    restart: always
-    ports:
-        - "3306:3306"
-    environment:
-        - MYSQL_USER=azkaban
-        - MYSQL_PASSWORD=azkaban
-        - MYSQL_DATABASE=azkaban
-        - MYSQL_ROOT_PASSWORD=wootwoot
-
 executor:
-    build: azkaban-exec/.
+    build: azkaban-exec-server/.
     restart: always
-    links:
-        - mariadb
 
 webserver:
-    build: azkaban-webserver/.
+    build: azkaban-web-server/.
     restart: always
     ports:
         - "8443:8443"
     links:
-        - executor:azkaban-executor
-        - mariadb
+        - executor:azkaban-exec-server
