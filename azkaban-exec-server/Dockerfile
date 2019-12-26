@@ -8,8 +8,8 @@ RUN set -eux \
 	&& apk add --update curl tzdata git \
     && curl -sLk https://github.com/azkaban/azkaban/archive/$AZK_VERSION.tar.gz| tar xzv \
     && cd azkaban-$AZK_VERSION \
-    && ./gradlew build \
-    && ./gradlew installDist \
+    && ./gradlew build -x test \
+    && ./gradlew installDist -x test \
     && mv azkaban-exec-server/build/install/azkaban-exec-server ../ \
     && cd .. \
     && mkdir azkaban-exec-server/logs/ \
