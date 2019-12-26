@@ -2,7 +2,7 @@ FROM openjdk:8-alpine
 
 ENV AZK_VERSION 3.81.0
 
-WORKDIR /root
+WORKDIR /data
 
 RUN set -eux \
 	&& apk add --update curl tzdata git \
