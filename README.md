@@ -10,7 +10,7 @@ This repository contains **Dockerfiles** of [Azkaban](http://azkaban.github.io/)
 
 
 ### Base Docker Image
-* Official [java:8](https://registry.hub.docker.com/_/java/)
+* Official [openjdk:8-alpine](https://registry.hub.docker.com/_/openjdk/)
 
 
 ### Installation
@@ -20,11 +20,7 @@ This repository contains **Dockerfiles** of [Azkaban](http://azkaban.github.io/)
 
 3. Download automated builds
 
-[azkaban-webserver](https://registry.hub.docker.com/u/puckel/azkaban-webserver/) from public [Docker Hub Registry](https://registry.hub.docker.com/): `docker pull puckel/docker-azkaban-webserver`
-
-[azkaban-executor](https://registry.hub.docker.com/u/puckel/azkaban-executor/) from public [Docker Hub Registry](https://registry.hub.docker.com/): `docker pull puckel/docker-azkaban-executor`
-
-Alternatively, you can build an image from [Dockerfile](https://github.com/puckel/docker-azkaban).
+Alternatively, you can build an image from [Dockerfile](https://github.com/javachen/docker-azkaban).
 
 
 ### Usage
@@ -32,5 +28,3 @@ Alternatively, you can build an image from [Dockerfile](https://github.com/pucke
 docker-compose up -d
 docker-compose ps
 ```
-
-The repository contains a shell script to test the azkaban stack: testing/test_api.sh (require [jq](https://stedolan.github.io/jq/)).
