@@ -10,12 +10,12 @@ services:
       - MYSQL_PASSWORD=azkaban
       - MYSQL_DATABASE=azkaban
       - MYSQL_ROOT_PASSWORD=wootwoot
-    links:
-       - mysql    
-
+     
   executor:
     build: azkaban-exec-server/.
     restart: always
+    links:
+       - mysql   
 
   webserver:
     build: azkaban-web-server/.
