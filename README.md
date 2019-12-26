@@ -28,3 +28,5 @@ Alternatively, you can build an image from [Dockerfile](https://github.com/javac
 docker-compose up -d
 docker-compose ps
 ```
+
+The repository contains a shell script to test the azkaban stack: testing/test_api.sh (require [jq](https://stedolan.github.io/jq/)).
