@@ -6,7 +6,7 @@ WORKDIR /root
 
 RUN set -eux \
     && apk add --update curl tzdata \
-    && curl -sLk https://github.com/azkaban/azkaban/archive/$AZK_VERSION.tar.gz| tar xz \
+    && curl -sLk https://github.com/azkaban/azkaban/archive/$AZK_VERSION.tar.gz| tar xzv \
     && cd azkaban-$AZK_VERSION \
     && ./gradlew build \
     && ./gradlew installDist \
