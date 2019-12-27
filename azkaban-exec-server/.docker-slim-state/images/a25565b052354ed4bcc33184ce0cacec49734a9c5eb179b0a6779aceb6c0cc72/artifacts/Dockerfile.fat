@@ -1,0 +1,29 @@
+# new image
+ADD file:a86aea1f3a7d68f6ae03397b99ea77f2e9ee901c5c59e59f76f93adbb4035913 in /
+CMD ["/bin/sh"]
+ENV LANG=C.UTF-8
+RUN { 		echo '#!/bin/sh'; 		echo 'set -e'; 		echo; 		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; 	} > /usr/local/bin/docker-java-home && \
+	chmod +x /usr/local/bin/docker-java-home
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
+ENV JAVA_VERSION=8u212
+ENV JAVA_ALPINE_VERSION=8.212.04-r0
+RUN set -x && \
+	apk add --no-cache 		openjdk8="$JAVA_ALPINE_VERSION" && \
+	[ "$JAVA_HOME" = "$(docker-java-home)" ]
+# end of image: openjdk:8-alpine (id: sha256:a3562aa0b991a80cfe8172847c8be6dbf6e46340b759c2b782f8b8be45342717 tags: openjdk:8-alpine)
+
+# new image
+WORKDIR /data
+EXPOSE 12321
+COPY file:3e0ce009cbd2a2d1fb66b33740c64d2b3edeeab98673b5361d8e1790b4e39857 in .
+RUN set -eux && \
+	apk add --update mysql-client mongodb-tools postgresql-client tzdata && \
+	ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+	echo Asia/Shanghai > /etc/timezone && \
+	apk del tzdata && \
+	unzip azkaban-exec-server.zip && \
+	rm -rf azkaban-exec-server.zip /tmp/* var/tmp/* /var/cache/apk/*
+COPY multi:77df33289d05d1d4cad56813c14c31a298a27b5a9ae3d69a577a1eb94c13c0ff in azkaban-exec-server/conf/
+WORKDIR /data/azkaban-exec-server
+# end of image: javachen/azkaban-exec-server:latest (id: sha256:a25565b052354ed4bcc33184ce0cacec49734a9c5eb179b0a6779aceb6c0cc72 tags: javachen/azkaban-exec-server:latest)

@@ -3,7 +3,6 @@ services:
   mysql:
     image: mysql:5.7
     restart: always
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0 --lower_case_table_names=1
     ports:
       - "3306:3306"
     networks:
@@ -13,11 +12,17 @@ services:
       - MYSQL_PASSWORD=azkaban
       - MYSQL_DATABASE=azkaban
       - MYSQL_ROOT_PASSWORD=wootwoot
+    volumes:
+      - azkaban-exec-server/create-all-sql-0.1.0-SNAPSHOT.sql:/docker-entrypoint-initdb.d/  
+      - /data/volumes/mysql:/var/lib/mysql
      
   executor:
     # build: azkaban-exec-server/.
     image: javachen/azkaban-exec-server
     restart: always
+    volumes:
+      - /data/bi_etl:/data/bi_etl
+      - /data/ods:/data/ods
     depends_on:
       - mysql  
     networks:
@@ -32,7 +37,7 @@ services:
     networks:
       - azkaban   
     ports:
-      - "8443:8443"
+      - "8081:8081"
 
 networks:
   azkaban:
