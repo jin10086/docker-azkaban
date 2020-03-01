@@ -1,9 +1,10 @@
-FROM python:3.7.6-alpine3.10
+FROM continuumio/miniconda3:4.7.12-alpine
 
+USER  root
 WORKDIR /data
 
 ENV LANG=C.UTF-8 \
-	JAVA_HOME=/usr/lib/jvm/default-jvm \
+    JAVA_HOME=/usr/lib/jvm/default-jvm \
     PATH=${PATH}:${JAVA_HOME}/bin 
 
 # Azkaban executor port
@@ -15,7 +16,7 @@ COPY azkaban-exec-server.zip .
 RUN set -eux \
     && echo 'https://mirrors.cloud.tencent.com/alpine/v3.11/main/' > /etc/apk/repositories \
     && echo 'https://mirrors.cloud.tencent.com/alpine/v3.11/community/' >> /etc/apk/repositories \
-	&& apk add --no-cache bash coreutils mysql-client mongodb-tools postgresql-client openjdk8-jre-base tzdata \
+    && apk add --no-cache bash coreutils mysql-client mongodb-tools postgresql-client openjdk8-jre-base tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone \
     && apk del tzdata \
     && unzip azkaban-exec-server.zip \
@@ -28,5 +29,6 @@ COPY conf/* conf/
 COPY run.sh run.sh
 COPY pip.conf /root/.pip/pip.conf
 RUN chmod +x run.sh
+RUN cp /home/anaconda/.profile /root/.bashrc
 
 CMD ./run.sh && tail -f /dev/null
