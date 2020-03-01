@@ -26,6 +26,7 @@ WORKDIR azkaban-exec-server
 
 COPY conf/* conf/
 COPY run.sh run.sh
+COPY pip.conf /root/.pip/pip.conf
 RUN chmod +x run.sh
 
 CMD ./run.sh && tail -f /dev/null
