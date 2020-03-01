@@ -1,4 +1,4 @@
-FROM alpine
+FROM python:3.7.6-alpine3.10
 
 WORKDIR /data
 
