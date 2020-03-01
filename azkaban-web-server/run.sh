@@ -23,7 +23,7 @@ sleep 10
 # Work around to run container as a daemon
 sed -i "s/ &//" $START_CMD
 
-curl -G "executor:12321/exector?action=activate" && echo
+curl -G "executor:12321/executor?action=activate" && echo
 
 AZKABAN_OPTS="-Xmx512m"
 
